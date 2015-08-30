@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace qSort
@@ -10,12 +12,32 @@ namespace qSort
     {
         private static void Main(string[] args)
         {
-            int[] myInts = { 8, 6, 4, 2, 0, 9, 7, 5, 3, 1 };
-            Sorter.QSortAsc(myInts);
-            foreach (int value in myInts)
+            int amount = 100000000;
+            int[] myInts = new int[amount];
+            Random rand = new Random();
+            for (int i = 0; i < myInts.Length; i++)
             {
-                Console.WriteLine(value);
+                myInts[i] = rand.Next();
             }
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            Sorter.QSortAsc(myInts);
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value. 
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
+
+
+            //foreach (int value in myInts)
+            //{
+            //    Console.WriteLine(value);
+            //}
             Console.ReadKey();
         }
     }
