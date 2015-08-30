@@ -10,7 +10,7 @@ namespace qSort
     {
         private static void Main(string[] args)
         {
-            int[] myInts = { 0, 2, 4, 6, 8, 1, 3, 5, 7, 9 };
+            int[] myInts = { 8, 6, 4, 2, 0, 9, 7, 5, 3, 1 };
             Sorter.QSortAsc(myInts);
             foreach (int value in myInts)
             {
@@ -24,42 +24,42 @@ namespace qSort
     {
         public static int[] QSortAsc(int[] arr)
         {
-            QuickSortAscending(ref arr, 0, arr.Length-1);
+            QuickSortAscending(ref arr, 0, arr.Length - 1);
             return arr;
         }
         private static void QuickSortAscending(ref int[] arr, int left, int right)
         {
-            int currentLeft = left;
-            int currentRight = right;
+            int leftPointer = left;
+            int rightPointer = right;
             int temp = 0;
-            int middle = arr[(currentLeft + currentRight) / 2];
+            int middle = arr[(leftPointer + rightPointer) / 2];
 
             do
             {
-                while (arr[currentLeft] < middle)
+                while (arr[leftPointer] < middle && leftPointer <= right)
                 {
-                    currentLeft++;
+                    leftPointer++;
                 }
-                while (arr[currentRight] > middle)
+                while (arr[rightPointer] > middle && rightPointer >= left)
                 {
-                    currentRight--;
+                    rightPointer--;
                 }
-                if (currentLeft <= currentRight)
+                if (leftPointer <= rightPointer)
                 {
-                    temp = arr[currentLeft];
-                    arr[currentLeft] = arr[currentRight];
-                    arr[currentRight] = temp;
-                    currentLeft++;
-                    currentRight--;
+                    temp = arr[leftPointer];
+                    arr[leftPointer] = arr[rightPointer];
+                    arr[rightPointer] = temp;
+                    leftPointer++;
+                    rightPointer--;
                 }
-            } while (currentLeft <= currentRight);
-            if (currentRight > left)
+            } while (leftPointer <= rightPointer);
+            if (rightPointer > left)
             {
-                QuickSortAscending(ref arr, left, currentRight);
+                QuickSortAscending(ref arr, left, rightPointer);
             }
-            if (currentLeft < right)
+            if (leftPointer < right)
             {
-                QuickSortAscending(ref arr, currentLeft, right);
+                QuickSortAscending(ref arr, leftPointer, right);
             }
         }
     }
