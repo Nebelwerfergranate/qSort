@@ -33,7 +33,7 @@ namespace qSort
             Console.WriteLine("Массивы 1 и 2 равны: " + CompareIntArrays(myInts, myInts2));
 
             stopWatch.Restart();
-            Sorter.QISortAsc(ref myInts3);
+            Sorter.QISortAsc(myInts3);
             stopWatch.Stop();
             PrintTime(stopWatch.Elapsed);
             Console.WriteLine("Массивы 2 и 3 равны: " + CompareIntArrays(myInts2, myInts3));
@@ -79,17 +79,17 @@ namespace qSort
     {
         //private static Random rand = new Random();
         //private static int temp = 0;
-        private const int Cutoff = 6;
+        private const int Cutoff = 10;
         public static int[] QSortAsc(int[] arr)
         {
             // Потери из-за передачи параметра по значению и его возврата составляют до 1% 0.02...0.05
             QuickSortAscending(ref arr, 0, arr.Length - 1);
             return arr;
         }
-        public static void QISortAsc(ref int[] arr)
+        public static void QISortAsc(int[] arr)
         {
-            QuickSortAscendingRaw(ref arr, 0, arr.Length - 1);
-            InsertSort(ref arr);
+            QuickSortAscendingRaw(arr, 0, arr.Length - 1);
+            InsertSort(arr);
         }
         private static void QuickSortAscending(ref int[] arr, int left, int right)
         {
@@ -134,7 +134,7 @@ namespace qSort
             }
         }
 
-        private static void QuickSortAscendingRaw(ref int[] arr, int left, int right)
+        private static void QuickSortAscendingRaw(int[] arr, int left, int right)
         {
             // Ускорение относительно первого способа.
             //1) Cutoff = 4: 0.34 ... 0.45
@@ -170,15 +170,15 @@ namespace qSort
             } while (leftPointer <= rightPointer);
             if (rightPointer > left + Cutoff)
             {
-                QuickSortAscendingRaw(ref arr, left, rightPointer);
+                QuickSortAscendingRaw(arr, left, rightPointer);
             }
             if (leftPointer < right - Cutoff)
             {
-                QuickSortAscendingRaw(ref arr, leftPointer, right);
+                QuickSortAscendingRaw(arr, leftPointer, right);
             }
         }
 
-        static private void InsertSort(ref int[] arr)
+        static private void InsertSort(int[] arr)
         {
             int temp, i, j;
             int count = arr.Length;
