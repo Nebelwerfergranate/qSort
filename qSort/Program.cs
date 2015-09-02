@@ -24,10 +24,10 @@ namespace qSort
     {
         public static int[] QSortAsc(int[] arr)
         {
-            QuickSortAscending(ref arr, 0, arr.Length - 1);
+            QuickSortAscending(arr, 0, arr.Length - 1);
             return arr;
         }
-        private static void QuickSortAscending(ref int[] arr, int left, int right)
+        private static void QuickSortAscending(int[] arr, int left, int right)
         {
             int leftPointer = left;
             int rightPointer = right;
@@ -55,11 +55,11 @@ namespace qSort
             } while (leftPointer <= rightPointer);
             if (rightPointer > left)
             {
-                QuickSortAscending(ref arr, left, rightPointer);
+                QuickSortAscending(arr, left, rightPointer);
             }
             if (leftPointer < right)
             {
-                QuickSortAscending(ref arr, leftPointer, right);
+                QuickSortAscending(arr, leftPointer, right);
             }
         }
     }
